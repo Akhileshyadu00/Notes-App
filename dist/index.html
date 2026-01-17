@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes - Premium Note Taking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="module" crossorigin src="/assets/index-Bqwl-t_o.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-eeFRHCFA.css">
+</head>
+
+<body>
+  <div id="app" class="app-container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fas fa-feather-alt"></i>
+          </div>
+          <h1>Notes</h1>
+        </div>
+      </div>
+
+      <div class="search-container">
+        <div class="search-bar">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search notes..." id="search-input">
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-item active" data-filter="all" id="nav-all">
+            <i class="fas fa-layer-group"></i>
+            <span>All Notes</span>
+            <span class="count" id="all-count">0</span>
+          </div>
+          <div class="nav-item" data-filter="pinned" id="nav-pinned">
+            <i class="fas fa-thumbtack"></i>
+            <span>Pinned</span>
+            <span class="count" id="pinned-count">0</span>
+          </div>
+          <div class="nav-item" data-filter="trash">
+            <i class="fas fa-trash-alt"></i>
+            <span>Trash</span>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="section-title">Tags</h3>
+          <div class="tag-list" id="tag-list">
+            <div class="tag-chip blue">Design</div>
+            <div class="tag-chip purple">Project</div>
+            <div class="tag-chip orange">Personal</div>
+            <div class="tag-chip green">Ideas</div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="theme-toggle" id="theme-toggle">
+          <i class="fas fa-moon"></i>
+          <span>Dark Mode</span>
+          <div class="toggle-switch"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Notes List Section -->
+    <section class="notes-list-section">
+      <header class="list-header">
+        <h2>All Notes</h2>
+        <div class="list-actions">
+          <button class="icon-btn" id="sort-btn"><i class="fas fa-sort-amount-down"></i></button>
+          <button class="add-note-btn" id="add-note-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </header>
+
+      <div class="notes-scroll-area">
+        <div class="notes-group" id="pinned-notes">
+          <h3 class="group-title">Pinned</h3>
+          <!-- Pinned Note Cards -->
+          <div class="note-card pinned active">
+            <div class="note-card-header">
+              <h4 class="note-title">App Design System</h4>
+              <i class="fas fa-thumbtack pin-icon"></i>
+            </div>
+            <p class="note-preview">A comprehensive guide to the design tokens, typography, and color palette for the
+              new project...</p>
+            <div class="note-meta">
+              <div class="note-tags">
+                <span class="tag-dot blue"></span>
+                <span class="tag-dot purple"></span>
+              </div>
+              <span class="note-time">2m ago</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="notes-group" id="regular-notes">
+          <h3 class="group-title">Recent</h3>
+          <!-- Note Cards -->
+          <div class="note-card">
+            <div class="note-card-header">
+              <h4 class="note-title">Backend API Routes</h4>
+              <i class="fas fa-thumbtack pin-icon hidden"></i>
+            </div>
+            <p class="note-preview">Define the core API endpoints for user authentication and note synchronization...
+            </p>
+            <div class="note-meta">
+              <div class="note-tags">
+                <span class="tag-dot orange"></span>
+              </div>
+              <span class="note-time">1h ago</span>
+            </div>
+          </div>
+          <div class="note-card">
+            <div class="note-card-header">
+              <h4 class="note-title">Grocery List</h4>
+              <i class="fas fa-thumbtack pin-icon hidden"></i>
+            </div>
+            <p class="note-preview">Milk, Eggs, Bread, Avocado, Coffee beans, Sparkling water...</p>
+            <div class="note-meta">
+              <div class="note-tags">
+                <span class="tag-dot green"></span>
+              </div>
+              <span class="note-time">Yesterday</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Editing Panel -->
+    <main class="editor-section">
+      <header class="editor-header">
+        <div class="editor-toolbar-top">
+          <div class="note-status">
+            <i class="fas fa-cloud-check sync-icon" id="sync-icon"></i>
+            <span class="sync-status" id="sync-status">Synced to Cloud</span>
+          </div>
+          <div class="editor-actions-top">
+            <button class="action-btn" id="pin-btn" title="Pin Note"><i class="fas fa-thumbtack"></i></button>
+            <button class="action-btn" title="Share"><i class="fas fa-share-nodes"></i></button>
+            <button class="action-btn danger" id="delete-btn" title="Delete"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+
+        <div class="editor-metadata">
+          <div class="editor-tags" id="editor-tags">
+            <span class="tag-chip-sm blue">Design <i class="fas fa-times"></i></span>
+            <span class="tag-chip-sm purple">Project <i class="fas fa-times"></i></span>
+            <button class="add-tag-btn"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+
+        <div class="rich-toolbar">
+          <button class="tool-btn active"><i class="fas fa-bold"></i></button>
+          <button class="tool-btn"><i class="fas fa-italic"></i></button>
+          <button class="tool-btn"><i class="fas fa-underline"></i></button>
+          <div class="tool-divider"></div>
+          <button class="tool-btn"><i class="fas fa-list-ul"></i></button>
+          <button class="tool-btn"><i class="fas fa-highlighter"></i></button>
+          <button class="tool-btn"><i class="fas fa-code"></i></button>
+        </div>
+      </header>
+
+      <div class="editor-content-wrapper">
+        <input type="text" class="editor-title-input" placeholder="Note Title" value="App Design System">
+        <div class="editor-body" contenteditable="true">
+          <p>A comprehensive guide to the <strong>design tokens</strong>, <em>typography</em>, and color palette for the
+            new project.</p>
+          <ul>
+            <li>Neutral backdrop: #0D0D0F</li>
+            <li>Accent: #6366F1</li>
+            <li>Corner Radius: 16px</li>
+          </ul>
+          <p>We should focus on a <u>minimalistic</u> aesthetic with subtle glassmorphism.</p>
+          <pre><code>const theme = {
+  primary: '#6366F1',
+  background: '#0D0D0F'
+};</code></pre>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
