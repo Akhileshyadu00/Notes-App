@@ -12,7 +12,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-const MONGODB_URI = "mongodb+srv://akhileshyadu001_db_user:v4ENQQ88NjpdyOku@cluster0.izxut3b.mongodb.net/notes_app?retryWrites=true&w=majority";
+const MONGODB_URI = process.env.MONGODB_URI || "";
 const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key_change_this';
 
 // Middleware
