@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Notes App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo"><i class="fas fa-brain"></i></div>
+                <h2 class="auth-title">Create Account</h2>
+                <p class="auth-subtitle">Join us and stay organized</p>
+            </div>
+
+            <div id="auth-error" class="auth-error"></div>
+
+            <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" class="form-input" required placeholder="Choose a username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-input" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="auth-btn">Sign Up</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html" class="auth-link">Login</a>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import { ApiService } from './src/api.ts';
+        const form = document.getElementById('signup-form');
+        const errorDiv = document.getElementById('auth-error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            errorDiv.style.display = 'none';
+
+            try {
+                await ApiService.register(username, password, 'user');
+                alert('Registration successful! Please login.');
+                window.location.href = 'login.html';
+            } catch (err) {
+                errorDiv.textContent = err.message || 'Failed to sign up';
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

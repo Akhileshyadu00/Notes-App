@@ -6,6 +6,7 @@ export interface INote extends Document {
     tags: string[];
     pinned: boolean;
     lastModified: number;
+    createdBy: mongoose.Types.ObjectId;
 }
 
 const NoteSchema: Schema = new Schema({
@@ -13,7 +14,8 @@ const NoteSchema: Schema = new Schema({
     content: { type: String, required: true },
     tags: { type: [String], default: [] },
     pinned: { type: Boolean, default: false },
-    lastModified: { type: Number, default: Date.now }
+    lastModified: { type: Number, default: Date.now },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
 export default mongoose.model<INote>('Note', NoteSchema);

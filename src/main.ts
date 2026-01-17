@@ -26,9 +26,24 @@ const tagChips = document.querySelectorAll('.tag-chip');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
+  // Check Authentication
+  const token = localStorage.getItem('notes_token');
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
+
   const savedTheme = StorageManager.getTheme();
   document.body.classList.toggle('light-theme', savedTheme === 'light');
   updateThemeUI(savedTheme);
+
+  // Update UI with user info
+  const username = localStorage.getItem('username');
+  const userRole = localStorage.getItem('user_role');
+  const userHeader = document.querySelector('.user-info h4');
+  const userRoleText = document.querySelector('.user-info p');
+  if (userHeader) userHeader.textContent = username || 'User';
+  if (userRoleText) userRoleText.textContent = userRole === 'admin' ? 'Administrator' : 'Basic User';
 
   await fetchNotes();
 
@@ -60,6 +75,14 @@ function setupEventListeners() {
       const theme = isLight ? 'light' : 'dark';
       StorageManager.saveTheme(theme);
       updateThemeUI(theme);
+    });
+  }
+
+  // Logout
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      ApiService.logout();
     });
   }
 
