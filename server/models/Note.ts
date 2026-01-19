@@ -18,4 +18,4 @@ const NoteSchema: Schema = new Schema({
     createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
-export default mongoose.model<INote>('Note', NoteSchema);
+export default mongoose.models.Note || mongoose.model<INote>('Note', NoteSchema);
