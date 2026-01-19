@@ -7,7 +7,7 @@ export interface Note {
     lastModified: number;
 }
 
-const API_URL = 'http://localhost:5001/api';
+const API_URL = '/api';
 
 export class ApiService {
     private static getHeaders() {

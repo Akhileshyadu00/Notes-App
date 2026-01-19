@@ -10,7 +10,7 @@ import { authenticateToken, AuthRequest } from './middleware/auth';
 
 dotenv.config();
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 5001;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key_change_this';
@@ -118,6 +118,10 @@ app.delete('/api/notes/:id', authenticateToken, async (req: AuthRequest, res) =>
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+export default app;
