@@ -24,11 +24,20 @@ export class ApiService {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password, role })
         });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Registration failed');
+
+        const text = await response.text();
+        let data;
+        try {
+            data = text ? JSON.parse(text) : {};
+        } catch (e) {
+            if (!response.ok) throw new Error(text || 'Registration failed');
+            throw new Error('Invalid JSON response from server');
         }
-        return response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Registration failed');
+        }
+        return data;
     }
 
     static async login(username: string, password: string) {
@@ -37,11 +46,20 @@ export class ApiService {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
         });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Login failed');
+
+        const text = await response.text();
+        let data;
+        try {
+            data = text ? JSON.parse(text) : {};
+        } catch (e) {
+            if (!response.ok) throw new Error(text || 'Login failed');
+            throw new Error('Invalid JSON response from server');
         }
-        return response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Login failed');
+        }
+        return data;
     }
 
     static async getNotes(): Promise<Note[]> {

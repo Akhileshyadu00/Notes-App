@@ -118,6 +118,12 @@ app.delete('/api/notes/:id', authenticateToken, async (req: AuthRequest, res) =>
     }
 });
 
+// Error Handler
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'A server error occurred', error: err.message });
+});
+
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
